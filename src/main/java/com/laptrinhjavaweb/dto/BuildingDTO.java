@@ -6,6 +6,7 @@ public class BuildingDTO {
 
 	private String name;
 	private Integer numOfBasement;
+	private String address;
 	private List<String> types;
 
 	public String getName() {
@@ -30,6 +31,14 @@ public class BuildingDTO {
 
 	public void setTypes(List<String> types) {
 		this.types = types;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

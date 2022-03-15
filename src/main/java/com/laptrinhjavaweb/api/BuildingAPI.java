@@ -2,6 +2,7 @@ package com.laptrinhjavaweb.api;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.myexception.FieldRequiredException;
+import com.laptrinhjavaweb.service.BuildingService;
 
 @RestController
 public class BuildingAPI {
 
+	@Autowired
+	private BuildingService buildingService;
+
 	@GetMapping("/api/building")
-	public List<BuildingDTO> getBuidlingList(@RequestParam(value= "name", required=false) String name,
+	public List<BuildingDTO> getBuidlingList(@RequestParam(value = "name", required = false) String name,
 			@RequestParam(value = "numberOfBasement", required = false) Integer numberOfBasement,
 			@RequestParam(value = "types", required = false) List<String> types) {
-		
-		return null;
+		return buildingService.findAll();
 	}
 
 	@GetMapping("/api/building/{id}")
