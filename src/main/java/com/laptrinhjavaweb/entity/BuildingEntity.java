@@ -1,10 +1,52 @@
 package com.laptrinhjavaweb.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BuildingEntity {
+
+	public BuildingEntity() {
+		this.types = new ArrayList<RentTypeEntity>();
+		this.areas = new ArrayList<RentAreaEntity>();
+		this.users = new ArrayList<UserEntity>();
+	}
+
+	private Long id;
 	private String name;
-	private Integer numberOfBasement;
 	private String street;
 	private String ward;
+	private String stucture;
+	private Integer numberOfBasement;
+	private Integer floorArea;
+	private String direction;
+	private String level;
+	private Integer rentPrice;
+	private String rentPriceDescription;
+	private String serviceFee;
+	private String carFee;
+	private String motorbikeFee;
+	private String overtimeFee;
+	private String waterFee;
+	private String electricityFee;
+	private String deposit;
+	private String payment;
+	private String rentTime;
+	private String decorationTime;
+	private Integer brokerAgeFee;
+	private String note;
+	private String linkOfBuilding;
+	private DistrictEntity district;
+	private List<RentTypeEntity> types;
+	private List<RentAreaEntity> areas;
+	private List<UserEntity> users;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -36,6 +78,215 @@ public class BuildingEntity {
 
 	public void setWard(String ward) {
 		this.ward = ward;
+	}
+
+	public String getStucture() {
+		return stucture;
+	}
+
+	public void setStucture(String stucture) {
+		this.stucture = stucture;
+	}
+
+	public Integer getFloorArea() {
+		return floorArea;
+	}
+
+	public void setFloorArea(Integer floorArea) {
+		this.floorArea = floorArea;
+	}
+
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public Integer getRentPrice() {
+		return rentPrice;
+	}
+
+	public void setRentPrice(Integer rentPrice) {
+		this.rentPrice = rentPrice;
+	}
+
+	public String getRentPriceDescription() {
+		return rentPriceDescription;
+	}
+
+	public void setRentPriceDescription(String rentPriceDescription) {
+		this.rentPriceDescription = rentPriceDescription;
+	}
+
+	public String getServiceFee() {
+		return serviceFee;
+	}
+
+	public void setServiceFee(String serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+
+	public String getCarFee() {
+		return carFee;
+	}
+
+	public void setCarFee(String carFee) {
+		this.carFee = carFee;
+	}
+
+	public String getElectricityFee() {
+		return electricityFee;
+	}
+
+	public void setElectricityFee(String electricityFee) {
+		this.electricityFee = electricityFee;
+	}
+
+	public String getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(String deposit) {
+		this.deposit = deposit;
+	}
+
+	public String getPayment() {
+		return payment;
+	}
+
+	public void setPayment(String payment) {
+		this.payment = payment;
+	}
+
+	public String getRentTime() {
+		return rentTime;
+	}
+
+	public void setRentTime(String rentTime) {
+		this.rentTime = rentTime;
+	}
+
+	public String getDecorationTime() {
+		return decorationTime;
+	}
+
+	public void setDecorationTime(String decorationTime) {
+		this.decorationTime = decorationTime;
+	}
+
+	public Integer getBrokerAgeFee() {
+		return brokerAgeFee;
+	}
+
+	public void setBrokerAgeFee(Integer brokerAgeFee) {
+		this.brokerAgeFee = brokerAgeFee;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+	public String getLinkOfBuilding() {
+		return linkOfBuilding;
+	}
+
+	public void setLinkOfBuilding(String linkOfBuilding) {
+		this.linkOfBuilding = linkOfBuilding;
+	}
+
+	public String getMotorbikeFee() {
+		return motorbikeFee;
+	}
+
+	public void setMotorbikeFee(String motorbikeFee) {
+		this.motorbikeFee = motorbikeFee;
+	}
+
+	public String getOvertimeFee() {
+		return overtimeFee;
+	}
+
+	public void setOvertimeFee(String overtimeFee) {
+		this.overtimeFee = overtimeFee;
+	}
+
+	public String getWaterFee() {
+		return waterFee;
+	}
+
+	public void setWaterFee(String waterFee) {
+		this.waterFee = waterFee;
+	}
+
+	public DistrictEntity getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
+	}
+
+	public List<RentTypeEntity> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<RentTypeEntity> types) {
+		this.types = types;
+	}
+
+	public List<RentAreaEntity> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<RentAreaEntity> areas) {
+		this.areas = areas;
+	}
+
+	public List<UserEntity> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserEntity> users) {
+		this.users = users;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BuildingEntity other = (BuildingEntity) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
