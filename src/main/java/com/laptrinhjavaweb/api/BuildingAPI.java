@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.dto.BuildingSearchDTO;
 import com.laptrinhjavaweb.myexception.FieldRequiredException;
 import com.laptrinhjavaweb.service.BuildingService;
 
@@ -22,11 +22,9 @@ public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
 
-	@GetMapping("/api/building")
-	public List<BuildingDTO> getBuidlingList(@RequestParam(value = "name", required = false) String name,
-			@RequestParam(value = "numberOfBasement", required = false) Integer numberOfBasement,
-			@RequestParam(value = "types", required = false) List<String> types) {
-		return buildingService.findAll();
+	@PostMapping("/api/building/search")
+	public List<BuildingDTO> searchBuidlings(@RequestBody BuildingSearchDTO buildingSearchDTO) {
+		return buildingService.searchBuildings(buildingSearchDTO);
 	}
 
 	@GetMapping("/api/building/{id}")

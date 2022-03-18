@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
+import com.laptrinhjavaweb.dto.BuildingSearchDTO;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.entity.DistrictEntity;
 import com.laptrinhjavaweb.entity.RentAreaEntity;
@@ -26,8 +27,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 	private String PASS = "123456";
 
 	@Override
-	public List<BuildingEntity> findAll() {
-//		String QUERY = "SELECT * from building";
+	public List<BuildingEntity> searchBuildings(BuildingSearchDTO buildingSearchDTO) {
 		StringBuilder sql = new StringBuilder("SELECT building.id as buildingid, building.name as buildingname,");
 		sql.append(
 				" street, ward, numberofbasement, floorarea, rentprice, district.code as districtcode, district.name as districtname,");
@@ -41,11 +41,35 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 		sql.append(" LEFT JOIN renttype ON buildingrenttype.renttypeid = renttype.id");
 		sql.append(" LEFT JOIN assignmentbuilding ON building.id = assignmentbuilding.buildingid");
 		sql.append(" LEFT JOIN user ON assignmentbuilding.staffid = user.id");
+	
+	
+		if(buildingSearchDTO.getBuildingName() == null) {
+			buildingSearchDTO.setBuildingName("");
+		}
+		sql.append(" WHERE building.name like '%" + buildingSearchDTO.getBuildingName() +"%'");
+		if(buildingSearchDTO.getFloorArea() != null) {
+			sql.append(" AND building.floorarea = " + buildingSearchDTO.getFloorArea());
+		}
+		if(buildingSearchDTO.getDistrictCode() != null) {
+			sql.append(" AND district.code like '%" + buildingSearchDTO.getDistrictCode() + "%'");
+		}
+		if(buildingSearchDTO.getStreet() != null) {
+			sql.append(" AND building.street like '%" + buildingSearchDTO.getStreet() +"%'");
+		}
+		if(buildingSearchDTO.getWard() != null) {
+			sql.append(" AND building.ward like '%" + buildingSearchDTO.getWard() +"%'");
+		}
+		if(buildingSearchDTO.getNumOfBasement() != null) {
+			sql.append(" AND building.numberofbasement = '" + buildingSearchDTO.getNumOfBasement() + "'");
+		}
+		
+
+		String query = sql.toString();
 		List<BuildingEntity> results = new ArrayList<BuildingEntity>();
 		// Open a connection
 		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sql.toString());) {
+				ResultSet rs = stmt.executeQuery(query);) {
 			while (rs.next()) {
 				BuildingEntity building = new BuildingEntity();
 				DistrictEntity district = new DistrictEntity();
