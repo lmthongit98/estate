@@ -1,5 +1,6 @@
 package com.laptrinhjavaweb.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuildingSearchDTO {
@@ -14,7 +15,11 @@ public class BuildingSearchDTO {
 	private Integer rentPriceTo;
 	private Integer rentPriceFrom;
 	private Long employeeId;
-	private List<String> buildingTypeCode;
+	private List<String> buildingTypeCodes;
+	
+	public BuildingSearchDTO() {
+		buildingTypeCodes = new ArrayList<String>();
+	}
 
 	public String getBuildingName() {
 		return buildingName;
@@ -104,12 +109,12 @@ public class BuildingSearchDTO {
 		this.employeeId = employeeId;
 	}
 
-	public List<String> getBuildingTypeCode() {
-		return buildingTypeCode;
+	public List<String> getBuildingTypeCodes() {
+		return buildingTypeCodes;
 	}
 
-	public void setBuildingTypeCode(List<String> buildingTypeCode) {
-		this.buildingTypeCode = buildingTypeCode;
+	public void setBuildingTypeCode(List<String> buildingTypeCodes) {
+		this.buildingTypeCodes = buildingTypeCodes;
 	}
 
 }

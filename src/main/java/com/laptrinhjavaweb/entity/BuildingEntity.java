@@ -35,7 +35,6 @@ public class BuildingEntity {
 	private Integer brokerAgeFee;
 	private String note;
 	private String linkOfBuilding;
-	private DistrictEntity district;
 	private List<RentTypeEntity> types;
 	private List<RentAreaEntity> areas;
 	private List<UserEntity> users;
@@ -230,14 +229,6 @@ public class BuildingEntity {
 
 	public void setWaterFee(String waterFee) {
 		this.waterFee = waterFee;
-	}
-
-	public DistrictEntity getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(DistrictEntity district) {
-		this.district = district;
 	}
 
 	public List<RentTypeEntity> getTypes() {

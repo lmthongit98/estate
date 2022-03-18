@@ -10,7 +10,6 @@ public class BuildingDTO {
 	private String address;
 	private Integer floorArea;
 	private Integer rentPrice;
-	private String district;
 	private List<String> types;
 	private List<Integer> areas;
 	private List<String> employees;
@@ -61,14 +60,6 @@ public class BuildingDTO {
 
 	public void setRentPrice(Integer rentPrice) {
 		this.rentPrice = rentPrice;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
 	}
 
 	public List<String> getTypes() {

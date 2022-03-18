@@ -26,13 +26,13 @@ public class BuildingServiceImpl implements BuildingService {
 
 		for (BuildingEntity building : buildings) {
 			BuildingDTO dto = new BuildingDTO();
+			String district = buildingRepository.findDistrictByBuidlingId(building.getId());
 			dto.setId(building.getId());
 			dto.setName(building.getName());
 			dto.setNumOfBasement(building.getNumberOfBasement());
-			dto.setAddress(building.getStreet() + ", " + building.getWard());
+			dto.setAddress(building.getStreet() + ", " + building.getWard() + ", " + district);
 			dto.setFloorArea(building.getFloorArea());
 			dto.setRentPrice(building.getRentPrice());
-			dto.setDistrict(building.getDistrict().getName());
 			dto.setAreas(building.getAreas().stream().map(area -> area.getValue()).collect(Collectors.toList()));
 			dto.setTypes(building.getTypes().stream().map(type -> type.getName()).collect(Collectors.toList()));
 			dto.setEmployees(building.getUsers().stream().map(user -> user.getFullName()).collect(Collectors.toList()));

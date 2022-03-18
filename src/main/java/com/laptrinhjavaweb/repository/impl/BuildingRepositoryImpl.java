@@ -41,28 +41,66 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 		sql.append(" LEFT JOIN renttype ON buildingrenttype.renttypeid = renttype.id");
 		sql.append(" LEFT JOIN assignmentbuilding ON building.id = assignmentbuilding.buildingid");
 		sql.append(" LEFT JOIN user ON assignmentbuilding.staffid = user.id");
-	
-	
-		if(buildingSearchDTO.getBuildingName() == null) {
+
+		if (buildingSearchDTO.getBuildingName() == null) {
 			buildingSearchDTO.setBuildingName("");
 		}
-		sql.append(" WHERE building.name like '%" + buildingSearchDTO.getBuildingName() +"%'");
-		if(buildingSearchDTO.getFloorArea() != null) {
+		sql.append(" WHERE building.name like '%" + buildingSearchDTO.getBuildingName() + "%'");
+		
+		if (buildingSearchDTO.getFloorArea() != null) {
 			sql.append(" AND building.floorarea = " + buildingSearchDTO.getFloorArea());
 		}
-		if(buildingSearchDTO.getDistrictCode() != null) {
+		
+		if (buildingSearchDTO.getDistrictCode() != null) {
 			sql.append(" AND district.code like '%" + buildingSearchDTO.getDistrictCode() + "%'");
 		}
-		if(buildingSearchDTO.getStreet() != null) {
-			sql.append(" AND building.street like '%" + buildingSearchDTO.getStreet() +"%'");
+		
+		if (buildingSearchDTO.getStreet() != null) {
+			sql.append(" AND building.street like '%" + buildingSearchDTO.getStreet() + "%'");
 		}
-		if(buildingSearchDTO.getWard() != null) {
-			sql.append(" AND building.ward like '%" + buildingSearchDTO.getWard() +"%'");
+		
+		if (buildingSearchDTO.getWard() != null) {
+			sql.append(" AND building.ward like '%" + buildingSearchDTO.getWard() + "%'");
 		}
-		if(buildingSearchDTO.getNumOfBasement() != null) {
+		
+		if (buildingSearchDTO.getNumOfBasement() != null) {
 			sql.append(" AND building.numberofbasement = '" + buildingSearchDTO.getNumOfBasement() + "'");
 		}
 		
+		if(buildingSearchDTO.getEmployeeId() != null) {
+			sql.append(" AND user.id = " + buildingSearchDTO.getEmployeeId());
+		}
+		
+		if(buildingSearchDTO.getBuildingTypeCodes() != null && buildingSearchDTO.getBuildingTypeCodes().size() > 0) {
+			sql.append(" AND (");
+			for(int i = 0; i < buildingSearchDTO.getBuildingTypeCodes().size(); i++) {
+				if(i >= buildingSearchDTO.getBuildingTypeCodes().size() - 1){
+					sql.append("renttype.code = '" + buildingSearchDTO.getBuildingTypeCodes().get(i) + "'");
+				}else {
+					sql.append("renttype.code = '" + buildingSearchDTO.getBuildingTypeCodes().get(i) + "' OR ");
+				}
+			}
+			sql.append(")");
+		}
+		
+		if (buildingSearchDTO.getAreaFrom() != null && buildingSearchDTO.getAreaTo() != null) {
+			sql.append(" AND building.floorarea >= " + buildingSearchDTO.getAreaFrom() + " AND building.floorarea <= "
+					+ buildingSearchDTO.getAreaTo());
+		} else if (buildingSearchDTO.getAreaFrom() != null) {
+			sql.append(" AND building.floorarea >= " + buildingSearchDTO.getAreaFrom());
+
+		} else if (buildingSearchDTO.getAreaTo() != null) {
+			sql.append(" AND building.floorarea <= " + buildingSearchDTO.getAreaTo());
+		}
+		
+		if (buildingSearchDTO.getRentPriceFrom() != null && buildingSearchDTO.getRentPriceTo() != null) {
+			sql.append(" AND building.rentprice >= " + buildingSearchDTO.getRentPriceFrom()
+					+ " AND building.rentprice <= " + buildingSearchDTO.getRentPriceTo());
+		} else if (buildingSearchDTO.getRentPriceFrom() != null) {
+			sql.append(" AND building.rentprice >= " + buildingSearchDTO.getRentPriceFrom());
+		} else if (buildingSearchDTO.getRentPriceTo() != null) {
+			sql.append(" AND building.rentprice <= " + buildingSearchDTO.getRentPriceTo());
+		}
 
 		String query = sql.toString();
 		List<BuildingEntity> results = new ArrayList<BuildingEntity>();
@@ -99,7 +137,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 					addUser(results, user, buildingEnity);
 					continue;
 				}
-				
+
 				types.add(type);
 				areas.add(area);
 				users.add(user);
@@ -114,7 +152,6 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 				building.setWard(rs.getString("ward"));
 				building.setFloorArea(rs.getInt("floorarea"));
 				building.setRentPrice(rs.getInt("rentprice"));
-				building.setDistrict(district);
 				building.setAreas(areas);
 				building.setTypes(types);
 				building.setUsers(users);
@@ -130,9 +167,27 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 		return null;
 	}
 
+	@Override
+	public String findDistrictByBuidlingId(Long id) {
+		StringBuilder sql = new StringBuilder("SELECT district.name as districtname FROM estatebasic.district");
+		sql.append(" JOIN building ON district.id = building.districtid");
+		sql.append(" WHERE building.id = " + id);
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql.toString());) {
+			while (rs.next()) {
+				return rs.getString("districtname");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
 	private void addUser(List<BuildingEntity> results, UserEntity user, BuildingEntity buildingEnity) {
 		List<UserEntity> users = buildingEnity.getUsers();
-		if(!users.contains(user)) {
+		if (!users.contains(user)) {
 			users.add(user);
 			buildingEnity.setUsers(users);
 			updateResults(results, buildingEnity);
@@ -141,7 +196,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 
 	private void addType(List<BuildingEntity> results, RentTypeEntity type, BuildingEntity buildingEnity) {
 		List<RentTypeEntity> types = buildingEnity.getTypes();
-		if(!types.contains(type)) {
+		if (!types.contains(type)) {
 			types.add(type);
 			buildingEnity.setTypes(types);
 			updateResults(results, buildingEnity);
