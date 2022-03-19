@@ -15,6 +15,8 @@ public class BuildingSearchRequest {
 	private Integer rentPriceTo;
 	private Integer rentPriceFrom;
 	private Long employeeId;
+	private String managerName;
+	private String managerPhone;
 	private List<String> buildingTypeCodes;
 	
 	public BuildingSearchRequest() {
@@ -111,6 +113,26 @@ public class BuildingSearchRequest {
 
 	public List<String> getBuildingTypeCodes() {
 		return buildingTypeCodes;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public String getManagerPhone() {
+		return managerPhone;
+	}
+
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
+	}
+
+	public void setBuildingTypeCodes(List<String> buildingTypeCodes) {
+		this.buildingTypeCodes = buildingTypeCodes;
 	}
 
 	public void setBuildingTypeCode(List<String> buildingTypeCodes) {

@@ -8,6 +8,8 @@ public class BuildingEntity {
 	private String stucture;
 	private Integer numberOfBasement;
 	private Integer floorArea;
+	private String managerName;
+	private String managerPhone;
 	private String direction;
 	private String level;
 	private Integer rentPrice;
@@ -216,6 +218,22 @@ public class BuildingEntity {
 
 	public void setWaterFee(String waterFee) {
 		this.waterFee = waterFee;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public String getManagerPhone() {
+		return managerPhone;
+	}
+
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
 	}
 
 }

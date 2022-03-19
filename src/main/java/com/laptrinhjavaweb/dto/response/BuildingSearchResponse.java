@@ -9,6 +9,8 @@ public class BuildingSearchResponse {
 	private Integer numberOfBasement;
 	private Integer floorArea;
 	private Integer rentPrice;
+	private String managerName;
+	private String managerPhone;
 
 	public Long getId() {
 		return id;
@@ -72,6 +74,22 @@ public class BuildingSearchResponse {
 
 	public void setRentPrice(Integer rentPrice) {
 		this.rentPrice = rentPrice;
+	}
+
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public String getManagerPhone() {
+		return managerPhone;
+	}
+
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
 	}
 
 }

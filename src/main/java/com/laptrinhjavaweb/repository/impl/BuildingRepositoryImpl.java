@@ -25,7 +25,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 	public List<BuildingEntity> searchBuildings(BuildingSearchRequest buildingSearchRequest) {
 		StringBuilder sql = new StringBuilder(
 				"SELECT distinct building.id as buildingid, building.name as buildingname,");
-		sql.append(" street, ward, numberofbasement, floorarea, rentprice");
+		sql.append(" street, ward, numberofbasement, floorarea, rentprice, managername, managerphone");
 		sql.append(" FROM building");
 		sql.append(" JOIN district ON building.districtid = district.id");
 		sql.append(" JOIN rentarea ON building.id = rentarea.buildingid");
@@ -61,6 +61,14 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 
 		if (buildingSearchRequest.getEmployeeId() != null) {
 			sql.append(" AND user.id = " + buildingSearchRequest.getEmployeeId());
+		}
+		
+		if(buildingSearchRequest.getManagerName() != null) {
+			sql.append(" AND building.managername like '%" + buildingSearchRequest.getManagerName() + "%'");
+		}
+		
+		if(buildingSearchRequest.getManagerPhone() != null) {
+			sql.append(" AND building.managerphone like '%" + buildingSearchRequest.getManagerPhone() + "%'");
 		}
 
 		if (buildingSearchRequest.getBuildingTypeCodes() != null && buildingSearchRequest.getBuildingTypeCodes().size() > 0) {
@@ -109,6 +117,8 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 				building.setWard(rs.getString("ward"));
 				building.setFloorArea(rs.getInt("floorarea"));
 				building.setRentPrice(rs.getInt("rentprice"));
+				building.setManagerName(rs.getString("managername"));
+				building.setManagerPhone(rs.getString("managerphone"));
 
 				results.add(building);
 			}
