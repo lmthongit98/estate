@@ -1,16 +1,6 @@
 package com.laptrinhjavaweb.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BuildingEntity {
-
-	public BuildingEntity() {
-		this.types = new ArrayList<RentTypeEntity>();
-		this.areas = new ArrayList<RentAreaEntity>();
-		this.users = new ArrayList<UserEntity>();
-	}
-
 	private Long id;
 	private String name;
 	private String street;
@@ -35,9 +25,6 @@ public class BuildingEntity {
 	private Integer brokerAgeFee;
 	private String note;
 	private String linkOfBuilding;
-	private List<RentTypeEntity> types;
-	private List<RentAreaEntity> areas;
-	private List<UserEntity> users;
 
 	public Long getId() {
 		return id;
@@ -229,55 +216,6 @@ public class BuildingEntity {
 
 	public void setWaterFee(String waterFee) {
 		this.waterFee = waterFee;
-	}
-
-	public List<RentTypeEntity> getTypes() {
-		return types;
-	}
-
-	public void setTypes(List<RentTypeEntity> types) {
-		this.types = types;
-	}
-
-	public List<RentAreaEntity> getAreas() {
-		return areas;
-	}
-
-	public void setAreas(List<RentAreaEntity> areas) {
-		this.areas = areas;
-	}
-
-	public List<UserEntity> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<UserEntity> users) {
-		this.users = users;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BuildingEntity other = (BuildingEntity) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
 	}
 
 }

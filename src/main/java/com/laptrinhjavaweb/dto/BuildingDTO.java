@@ -1,18 +1,14 @@
 package com.laptrinhjavaweb.dto;
 
-import java.util.List;
-
 public class BuildingDTO {
-
 	private Long id;
 	private String name;
-	private Integer numOfBasement;
+	private String street;
+	private String ward;
 	private String address;
+	private Integer numberOfBasement;
 	private Integer floorArea;
 	private Integer rentPrice;
-	private List<String> types;
-	private List<Integer> areas;
-	private List<String> employees;
 
 	public Long getId() {
 		return id;
@@ -30,12 +26,12 @@ public class BuildingDTO {
 		this.name = name;
 	}
 
-	public Integer getNumOfBasement() {
-		return numOfBasement;
+	public Integer getNumberOfBasement() {
+		return numberOfBasement;
 	}
 
-	public void setNumOfBasement(Integer numOfBasement) {
-		this.numOfBasement = numOfBasement;
+	public void setNumberOfBasement(Integer numberOfBasement) {
+		this.numberOfBasement = numberOfBasement;
 	}
 
 	public String getAddress() {
@@ -62,28 +58,20 @@ public class BuildingDTO {
 		this.rentPrice = rentPrice;
 	}
 
-	public List<String> getTypes() {
-		return types;
+	public String getStreet() {
+		return street;
 	}
 
-	public void setTypes(List<String> types) {
-		this.types = types;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
-	public List<Integer> getAreas() {
-		return areas;
+	public String getWard() {
+		return ward;
 	}
 
-	public void setAreas(List<Integer> areas) {
-		this.areas = areas;
-	}
-
-	public List<String> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(List<String> employees) {
-		this.employees = employees;
+	public void setWard(String ward) {
+		this.ward = ward;
 	}
 
 }
