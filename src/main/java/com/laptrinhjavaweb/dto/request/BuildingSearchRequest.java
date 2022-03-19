@@ -1,9 +1,9 @@
-package com.laptrinhjavaweb.dto;
+package com.laptrinhjavaweb.dto.request;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildingSearchDTO {
+public class BuildingSearchRequest {
 	private String buildingName;
 	private Integer floorArea;
 	private String districtCode;
@@ -17,7 +17,7 @@ public class BuildingSearchDTO {
 	private Long employeeId;
 	private List<String> buildingTypeCodes;
 	
-	public BuildingSearchDTO() {
+	public BuildingSearchRequest() {
 		buildingTypeCodes = new ArrayList<String>();
 	}
 

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.dto.BuildingDTO;
-import com.laptrinhjavaweb.dto.BuildingSearchDTO;
+import com.laptrinhjavaweb.dto.request.BuildingAssignmentRequest;
+import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
+import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 import com.laptrinhjavaweb.myexception.FieldRequiredException;
 import com.laptrinhjavaweb.service.BuildingService;
 
@@ -23,8 +25,8 @@ public class BuildingAPI {
 	private BuildingService buildingService;
 
 	@PostMapping("/api/building/search")
-	public List<BuildingDTO> searchBuidlings(@RequestBody BuildingSearchDTO buildingSearchDTO) {
-		return buildingService.searchBuildings(buildingSearchDTO);
+	public List<BuildingSearchResponse> searchBuidlings(@RequestBody BuildingSearchRequest buildingSearchRquest) {
+		return buildingService.searchBuildings(buildingSearchRquest);
 	}
 
 	@GetMapping("/api/building/{id}")
@@ -58,6 +60,11 @@ public class BuildingAPI {
 	@DeleteMapping("/api/building")
 	public void deleteBuilding(@RequestBody String[] ids) {
 		System.out.println(ids);
+	}
+	
+	@PostMapping("/api/building/assignment")
+	public void assignBuildingToStaff(@RequestBody BuildingAssignmentRequest buildingAssignmentRequest) {
+		
 	}
 
 }

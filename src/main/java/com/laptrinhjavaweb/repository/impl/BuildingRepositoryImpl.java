@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.laptrinhjavaweb.dto.BuildingSearchDTO;
+import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.repository.BuildingRepository;
 
@@ -22,7 +22,7 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 	private String PASS = "123456";
 
 	@Override
-	public List<BuildingEntity> searchBuildings(BuildingSearchDTO buildingSearchDTO) {
+	public List<BuildingEntity> searchBuildings(BuildingSearchRequest buildingSearchRequest) {
 		StringBuilder sql = new StringBuilder(
 				"SELECT distinct building.id as buildingid, building.name as buildingname,");
 		sql.append(" street, ward, numberofbasement, floorarea, rentprice");
@@ -34,64 +34,64 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 		sql.append(" LEFT JOIN assignmentbuilding ON building.id = assignmentbuilding.buildingid");
 		sql.append(" LEFT JOIN user ON assignmentbuilding.staffid = user.id");
 
-		if (buildingSearchDTO.getBuildingName() == null) {
-			buildingSearchDTO.setBuildingName("");
+		if (buildingSearchRequest.getBuildingName() == null) {
+			buildingSearchRequest.setBuildingName("");
 		}
-		sql.append(" WHERE building.name like '%" + buildingSearchDTO.getBuildingName() + "%'");
+		sql.append(" WHERE building.name like '%" + buildingSearchRequest.getBuildingName() + "%'");
 
-		if (buildingSearchDTO.getFloorArea() != null) {
-			sql.append(" AND building.floorarea = " + buildingSearchDTO.getFloorArea());
-		}
-
-		if (buildingSearchDTO.getDistrictCode() != null) {
-			sql.append(" AND district.code like '%" + buildingSearchDTO.getDistrictCode() + "%'");
+		if (buildingSearchRequest.getFloorArea() != null) {
+			sql.append(" AND building.floorarea = " + buildingSearchRequest.getFloorArea());
 		}
 
-		if (buildingSearchDTO.getStreet() != null) {
-			sql.append(" AND building.street like '%" + buildingSearchDTO.getStreet() + "%'");
+		if (buildingSearchRequest.getDistrictCode() != null) {
+			sql.append(" AND district.code like '%" + buildingSearchRequest.getDistrictCode() + "%'");
 		}
 
-		if (buildingSearchDTO.getWard() != null) {
-			sql.append(" AND building.ward like '%" + buildingSearchDTO.getWard() + "%'");
+		if (buildingSearchRequest.getStreet() != null) {
+			sql.append(" AND building.street like '%" + buildingSearchRequest.getStreet() + "%'");
 		}
 
-		if (buildingSearchDTO.getNumOfBasement() != null) {
-			sql.append(" AND building.numberofbasement = '" + buildingSearchDTO.getNumOfBasement() + "'");
+		if (buildingSearchRequest.getWard() != null) {
+			sql.append(" AND building.ward like '%" + buildingSearchRequest.getWard() + "%'");
 		}
 
-		if (buildingSearchDTO.getEmployeeId() != null) {
-			sql.append(" AND user.id = " + buildingSearchDTO.getEmployeeId());
+		if (buildingSearchRequest.getNumOfBasement() != null) {
+			sql.append(" AND building.numberofbasement = '" + buildingSearchRequest.getNumOfBasement() + "'");
 		}
 
-		if (buildingSearchDTO.getBuildingTypeCodes() != null && buildingSearchDTO.getBuildingTypeCodes().size() > 0) {
+		if (buildingSearchRequest.getEmployeeId() != null) {
+			sql.append(" AND user.id = " + buildingSearchRequest.getEmployeeId());
+		}
+
+		if (buildingSearchRequest.getBuildingTypeCodes() != null && buildingSearchRequest.getBuildingTypeCodes().size() > 0) {
 			sql.append(" AND (");
-			for (int i = 0; i < buildingSearchDTO.getBuildingTypeCodes().size(); i++) {
-				if (i >= buildingSearchDTO.getBuildingTypeCodes().size() - 1) {
-					sql.append("renttype.code = '" + buildingSearchDTO.getBuildingTypeCodes().get(i) + "'");
+			for (int i = 0; i < buildingSearchRequest.getBuildingTypeCodes().size(); i++) {
+				if (i >= buildingSearchRequest.getBuildingTypeCodes().size() - 1) {
+					sql.append("renttype.code = '" + buildingSearchRequest.getBuildingTypeCodes().get(i) + "'");
 				} else {
-					sql.append("renttype.code = '" + buildingSearchDTO.getBuildingTypeCodes().get(i) + "' OR ");
+					sql.append("renttype.code = '" + buildingSearchRequest.getBuildingTypeCodes().get(i) + "' OR ");
 				}
 			}
 			sql.append(")");
 		}
 
-		if (buildingSearchDTO.getAreaFrom() != null && buildingSearchDTO.getAreaTo() != null) {
-			sql.append(" AND building.floorarea >= " + buildingSearchDTO.getAreaFrom() + " AND building.floorarea <= "
-					+ buildingSearchDTO.getAreaTo());
-		} else if (buildingSearchDTO.getAreaFrom() != null) {
-			sql.append(" AND building.floorarea >= " + buildingSearchDTO.getAreaFrom());
+		if (buildingSearchRequest.getAreaFrom() != null && buildingSearchRequest.getAreaTo() != null) {
+			sql.append(" AND building.floorarea >= " + buildingSearchRequest.getAreaFrom() + " AND building.floorarea <= "
+					+ buildingSearchRequest.getAreaTo());
+		} else if (buildingSearchRequest.getAreaFrom() != null) {
+			sql.append(" AND building.floorarea >= " + buildingSearchRequest.getAreaFrom());
 
-		} else if (buildingSearchDTO.getAreaTo() != null) {
-			sql.append(" AND building.floorarea <= " + buildingSearchDTO.getAreaTo());
+		} else if (buildingSearchRequest.getAreaTo() != null) {
+			sql.append(" AND building.floorarea <= " + buildingSearchRequest.getAreaTo());
 		}
 
-		if (buildingSearchDTO.getRentPriceFrom() != null && buildingSearchDTO.getRentPriceTo() != null) {
-			sql.append(" AND building.rentprice >= " + buildingSearchDTO.getRentPriceFrom()
-					+ " AND building.rentprice <= " + buildingSearchDTO.getRentPriceTo());
-		} else if (buildingSearchDTO.getRentPriceFrom() != null) {
-			sql.append(" AND building.rentprice >= " + buildingSearchDTO.getRentPriceFrom());
-		} else if (buildingSearchDTO.getRentPriceTo() != null) {
-			sql.append(" AND building.rentprice <= " + buildingSearchDTO.getRentPriceTo());
+		if (buildingSearchRequest.getRentPriceFrom() != null && buildingSearchRequest.getRentPriceTo() != null) {
+			sql.append(" AND building.rentprice >= " + buildingSearchRequest.getRentPriceFrom()
+					+ " AND building.rentprice <= " + buildingSearchRequest.getRentPriceTo());
+		} else if (buildingSearchRequest.getRentPriceFrom() != null) {
+			sql.append(" AND building.rentprice >= " + buildingSearchRequest.getRentPriceFrom());
+		} else if (buildingSearchRequest.getRentPriceTo() != null) {
+			sql.append(" AND building.rentprice <= " + buildingSearchRequest.getRentPriceTo());
 		}
 
 		String query = sql.toString();

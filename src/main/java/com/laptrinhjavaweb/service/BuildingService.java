@@ -2,9 +2,9 @@ package com.laptrinhjavaweb.service;
 
 import java.util.List;
 
-import com.laptrinhjavaweb.dto.BuildingDTO;
-import com.laptrinhjavaweb.dto.BuildingSearchDTO;
+import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
+import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 
 public interface BuildingService {
-	List<BuildingDTO> searchBuildings(BuildingSearchDTO buildingSearchDTO);
+	List<BuildingSearchResponse> searchBuildings(BuildingSearchRequest buildingSearchRequest);
 }
