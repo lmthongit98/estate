@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,11 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.dto.request.BuildingAssignmentRequest;
-import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
 import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 import com.laptrinhjavaweb.myexception.FieldRequiredException;
 import com.laptrinhjavaweb.service.BuildingService;
@@ -24,9 +25,9 @@ public class BuildingAPI {
 	@Autowired
 	private BuildingService buildingService;
 
-	@PostMapping("/api/building/search")
-	public List<BuildingSearchResponse> searchBuidlings(@RequestBody BuildingSearchRequest buildingSearchRquest) {
-		return buildingService.searchBuildings(buildingSearchRquest);
+	@GetMapping("/api/building/search")
+	public List<BuildingSearchResponse> searchBuidlings(@RequestParam Map<String, String> customQuery, @RequestParam(required = false) List<String> types) {
+		return buildingService.searchBuildings(customQuery, types);
 	}
 
 	@GetMapping("/api/building/{id}")

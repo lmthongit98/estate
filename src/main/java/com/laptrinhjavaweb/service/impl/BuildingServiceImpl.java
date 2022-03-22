@@ -2,12 +2,12 @@ package com.laptrinhjavaweb.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.laptrinhjavaweb.converter.BuildingConverter;
-import com.laptrinhjavaweb.dto.request.BuildingSearchRequest;
 import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.repository.BuildingRepository;
@@ -23,8 +23,8 @@ public class BuildingServiceImpl implements BuildingService {
 	private BuildingConverter buildingCoverter;
 
 	@Override
-	public List<BuildingSearchResponse> searchBuildings(BuildingSearchRequest buildingSearchRequest) {
-		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(buildingSearchRequest);
+	public List<BuildingSearchResponse> searchBuildings(Map<String, String> customQuery, List<String> types) {
+		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(customQuery, types);
 		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
 
 		for (BuildingEntity entity : buildingEntitys) {
