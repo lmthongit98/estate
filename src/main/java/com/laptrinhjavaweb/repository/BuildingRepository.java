@@ -6,7 +6,7 @@ import java.util.Map;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 
 public interface BuildingRepository {
-	List<BuildingEntity> searchBuildings(Map<String, String> customQuery, List<String> types);
+	List<BuildingEntity> searchBuildings(Map<String, String> params, List<String> types);
 
-	String findDistrictByBuidlingId(Long id);
+	String findDistrictById(Long districtId);
 }

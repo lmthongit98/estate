@@ -23,13 +23,13 @@ public class BuildingServiceImpl implements BuildingService {
 	private BuildingConverter buildingCoverter;
 
 	@Override
-	public List<BuildingSearchResponse> searchBuildings(Map<String, String> customQuery, List<String> types) {
-		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(customQuery, types);
+	public List<BuildingSearchResponse> searchBuildings(Map<String, String> params, List<String> types) {
+		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(params, types);
 		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
 
 		for (BuildingEntity entity : buildingEntitys) {
 			BuildingSearchResponse response = buildingCoverter.covertToBuildingSearchResponseFromEnity(entity);
-			String district = buildingRepository.findDistrictByBuidlingId(entity.getId());
+			String district = buildingRepository.findDistrictById(entity.getDistrictId());
 			response.setAddress(response.getAddress() + ", " + district);
 			responses.add(response);
 		}

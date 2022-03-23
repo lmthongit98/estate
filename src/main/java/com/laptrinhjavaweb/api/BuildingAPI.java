@@ -26,8 +26,8 @@ public class BuildingAPI {
 	private BuildingService buildingService;
 
 	@GetMapping("/api/building/search")
-	public List<BuildingSearchResponse> searchBuidlings(@RequestParam Map<String, String> customQuery, @RequestParam(required = false) List<String> types) {
-		return buildingService.searchBuildings(customQuery, types);
+	public List<BuildingSearchResponse> searchBuidlings(@RequestParam Map<String, String> params, @RequestParam(required = false) List<String> types) {
+		return buildingService.searchBuildings(params, types);
 	}
 
 	@GetMapping("/api/building/{id}")

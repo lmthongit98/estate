@@ -5,6 +5,7 @@ public class BuildingEntity {
 	private String name;
 	private String street;
 	private String ward;
+	private Long districtId;
 	private String stucture;
 	private Integer numberOfBasement;
 	private Integer floorArea;
@@ -234,6 +235,14 @@ public class BuildingEntity {
 
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
+	}
+
+	public Long getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(Long districtId) {
+		this.districtId = districtId;
 	}
 
 }
