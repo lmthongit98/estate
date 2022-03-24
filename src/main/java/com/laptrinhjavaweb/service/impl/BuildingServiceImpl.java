@@ -11,6 +11,7 @@ import com.laptrinhjavaweb.converter.BuildingConverter;
 import com.laptrinhjavaweb.dto.response.BuildingSearchResponse;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.repository.BuildingRepository;
+import com.laptrinhjavaweb.repository.DistrictRepository;
 import com.laptrinhjavaweb.service.BuildingService;
 
 @Service
@@ -20,6 +21,9 @@ public class BuildingServiceImpl implements BuildingService {
 	private BuildingRepository buildingRepository;
 	
 	@Autowired
+	private DistrictRepository districtRepository;
+	
+	@Autowired
 	private BuildingConverter buildingCoverter;
 
 	@Override
@@ -27,14 +31,14 @@ public class BuildingServiceImpl implements BuildingService {
 		
 		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
 		
-		if(params.isEmpty() && types.isEmpty()) {
+		if(params.isEmpty() && (types == null || types.isEmpty())) {
 			return responses;
 		}
 		
 		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(params, types);
 		for (BuildingEntity entity : buildingEntitys) {
 			BuildingSearchResponse response = buildingCoverter.covertToBuildingSearchResponseFromEnity(entity);
-			String district = buildingRepository.findDistrictById(entity.getDistrictId());
+			String district = districtRepository.findById(entity.getDistrictId());
 			response.setAddress(response.getAddress() + ", " + district);
 			responses.add(response);
 		}
