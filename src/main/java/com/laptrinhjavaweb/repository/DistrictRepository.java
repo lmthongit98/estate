@@ -1,5 +1,7 @@
 package com.laptrinhjavaweb.repository;
 
+import com.laptrinhjavaweb.entity.DistrictEntity;
+
 public interface DistrictRepository {
-	String findById(Long id);
+	DistrictEntity findById(Long id);
 }
