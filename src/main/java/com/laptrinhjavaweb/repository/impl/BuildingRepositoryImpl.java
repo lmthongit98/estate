@@ -144,7 +144,8 @@ public class BuildingRepositoryImpl implements BuildingRepository {
 			joinQuery.append(" JOIN rentarea ON b.id = rentarea.buildingid");
 			if(ValidateUtil.isNotBlank(areaFrom)) {
 				whereQuery.append(" AND rentarea.value >= ").append(Integer.parseInt(areaFrom));
-			} else {
+			} 
+			if(ValidateUtil.isNotBlank(areaTo)){
 				whereQuery.append(" AND rentarea.value <= ").append(Integer.parseInt(areaTo));
 			}
 			
