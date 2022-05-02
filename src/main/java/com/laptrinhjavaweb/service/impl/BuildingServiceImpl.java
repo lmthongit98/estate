@@ -25,19 +25,6 @@ public class BuildingServiceImpl implements BuildingService {
 	@Override
 	public List<BuildingSearchResponse> searchBuildings(Map<String, String> params, List<String> types) {
 
-		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
-
-		if (params.isEmpty() && (types == null || types.isEmpty())) {
-			return responses;
-		}
-
-		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(params, types);
-		for (BuildingEntity entity : buildingEntitys) {
-			BuildingSearchResponse response = buildingCoverter.covertToBuildingSearchResponseFromEnity(entity);
-			responses.add(response);
-		}
-
-		return responses;
+		return null;
 	}
-
 }
