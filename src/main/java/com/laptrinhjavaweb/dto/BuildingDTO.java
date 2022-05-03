@@ -5,12 +5,12 @@ public class BuildingDTO {
 	private String name;
 	private String street;
 	private String ward;
-	private String address;
 	private Integer numberOfBasement;
 	private Integer floorArea;
 	private Integer rentPrice;
 	private String managerName;
 	private String managerPhone;
+	private String rentAreaStr; // e.g: 100, 200, 300
 
 	public Long getId() {
 		return id;
@@ -34,14 +34,6 @@ public class BuildingDTO {
 
 	public void setNumberOfBasement(Integer numberOfBasement) {
 		this.numberOfBasement = numberOfBasement;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public Integer getFloorArea() {
@@ -90,6 +82,14 @@ public class BuildingDTO {
 
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
+	}
+
+	public String getRentAreaStr() {
+		return rentAreaStr;
+	}
+
+	public void setRentAreaStr(String rentAreaStr) {
+		this.rentAreaStr = rentAreaStr;
 	}
 
 }

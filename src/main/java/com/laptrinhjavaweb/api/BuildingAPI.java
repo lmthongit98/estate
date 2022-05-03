@@ -24,6 +24,12 @@ public class BuildingAPI {
 
 	@Autowired
 	private BuildingService buildingService;
+	
+	@GetMapping("/api/building")
+	public List<BuildingSearchResponse> findAll(
+	@RequestParam(required = false) Map<String, String> params, @RequestParam(required = false) List<String> types) {
+		return buildingService.findAll(params, types);
+	}
 
 	@GetMapping("/api/building/search")
 	public List<BuildingSearchResponse> searchBuidlings(
