@@ -18,7 +18,6 @@ public class MapUtil {
 		if (tClass.getName().equals("java.lang.Integer")) {
 			return (T) Integer.valueOf(value);
 		}
-		
 
 		return (T) value;
 	}

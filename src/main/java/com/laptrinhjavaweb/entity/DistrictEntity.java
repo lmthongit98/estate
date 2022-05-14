@@ -1,17 +1,22 @@
 package com.laptrinhjavaweb.entity;
 
-public class DistrictEntity {
-	private Long id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "district")
+public class DistrictEntity extends BaseEntity {
+
+	@Column(name = "code")
 	private String code;
+
+	@Column(name = "name")
 	private String name;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@OneToMany(mappedBy = "district", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+			CascadeType.REFRESH })
+	private Set<BuildingEntity> buildings = new HashSet<>();
 
 	public String getCode() {
 		return code;

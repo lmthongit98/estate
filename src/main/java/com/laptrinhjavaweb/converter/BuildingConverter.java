@@ -26,8 +26,7 @@ public class BuildingConverter {
 
 	public BuildingSearchResponse covertToBuildingSearchResponseFromEnity(BuildingEntity entity) {
 		BuildingSearchResponse response = modelMapper.map(entity, BuildingSearchResponse.class);
-		DistrictEntity district = districtRepository.findById(entity.getDistrictId());
-		response.setAddress(response.getStreet() + ", " + response.getWard() + ", " + district.getName());
+		response.setAddress(response.getStreet() + ", " + response.getWard() + ", " + entity.getDistrict().getName());
 		return response;
 	}
 

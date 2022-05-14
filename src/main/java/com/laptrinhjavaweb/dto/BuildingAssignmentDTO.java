@@ -2,7 +2,7 @@ package com.laptrinhjavaweb.dto;
 
 import java.util.List;
 
-public class BuidingAssignmentDTO {
+public class BuildingAssignmentDTO {
 	private List<Long> ids;
 	private Long buildingId;
 

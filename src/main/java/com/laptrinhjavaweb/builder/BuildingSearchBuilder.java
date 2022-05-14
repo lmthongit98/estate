@@ -1,5 +1,8 @@
 package com.laptrinhjavaweb.builder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BuildingSearchBuilder {
 
 	private String name;
@@ -8,7 +11,7 @@ public class BuildingSearchBuilder {
 	private String street;
 	private String ward;
 	private Integer numberOfBasement;
-	private String[] buildingTypes = new String[] {};
+	private List<String> buildingTypes = new ArrayList<String>();
 	private Integer costRentFrom;
 	private Integer costRentTo;
 	private Integer areaRentFrom;
@@ -40,7 +43,7 @@ public class BuildingSearchBuilder {
 		return ward;
 	}
 
-	public String[] getBuildingTypes() {
+	public List<String> getBuildingTypes() {
 		return buildingTypes;
 	}
 
@@ -96,7 +99,7 @@ public class BuildingSearchBuilder {
 		private String ward;
 		private Integer floorarea;
 		private Integer numberOfBasement;
-		private String[] buildingTypes = new String[] {};
+		private List<String> buildingTypes = new ArrayList<>();
 		private Integer costRentFrom;
 		private Integer costRentTo;
 		private Integer areaRentFrom;
@@ -136,7 +139,7 @@ public class BuildingSearchBuilder {
 			return this;
 		}
 
-		public Builder setBuildingTypes(String[] buildingTypes) {
+		public Builder setBuildingTypes(List<String> buildingTypes) {
 			this.buildingTypes = buildingTypes;
 			return this;
 		}

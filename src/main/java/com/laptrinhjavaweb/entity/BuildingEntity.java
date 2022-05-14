@@ -1,41 +1,102 @@
 package com.laptrinhjavaweb.entity;
 
-public class BuildingEntity {
-	private Long id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "building")
+public class BuildingEntity extends BaseEntity {
+	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "street")
 	private String street;
+	
+	@Column(name = "ward")
 	private String ward;
-	private Long districtId;
+	
+	@Column(name = "structure")
 	private String stucture;
+	
+	@Column(name = "numberofbasement")
 	private Integer numberOfBasement;
+	
+	@Column(name = "floorarea")
 	private Integer floorArea;
+	
+	@Column(name = "managername")
 	private String managerName;
+	
+	@Column(name = "managerphone")
 	private String managerPhone;
+	
+	@Column(name = "direction")
 	private String direction;
+	
+	@Column(name = "level")
 	private String level;
+	
+	@Column(name = "rentprice")
 	private Integer rentPrice;
+	
+	@Column(name = "rentpricedescription")
 	private String rentPriceDescription;
+	
+	@Column(name = "servicefee")
 	private String serviceFee;
+	
+	@Column(name = "carfee")
 	private String carFee;
+	
+	@Column(name = "motorbikefee")
 	private String motorbikeFee;
+	
+	@Column(name = "overtimefee")
 	private String overtimeFee;
+	
+	@Column(name = "waterfee")
 	private String waterFee;
+	
+	@Column(name = "electricityfee")
 	private String electricityFee;
+	
+	@Column(name = "deposit")
 	private String deposit;
+	
+	@Column(name = "payment")
 	private String payment;
+	
+	@Column(name = "renttime")
 	private String rentTime;
+	
+	@Column(name = "decorationtime")
 	private String decorationTime;
+	
+	@Column(name = "brokeragefee")
 	private Integer brokerAgeFee;
+	
+	@Column(name = "note")
 	private String note;
+	
+	@Column(name = "linkofbuilding")
 	private String linkOfBuilding;
 
-	public Long getId() {
-		return id;
-	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
+	private Set<RentAreaEntity> rentAreas = new HashSet<>();
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "district_id")
+	private DistrictEntity district;
+
+	@ManyToMany(mappedBy = "assignedBuildings", fetch = FetchType.LAZY)
+	private Set<UserEntity> assignees = new HashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "building_renttype",
+			joinColumns = @JoinColumn(name = "building_id", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "renttype_id", nullable = false))
+	private Set<RentType> rentTypes = new HashSet<>();
 
 	public String getName() {
 		return name;
@@ -237,12 +298,35 @@ public class BuildingEntity {
 		this.managerPhone = managerPhone;
 	}
 
-	public Long getDistrictId() {
-		return districtId;
+	public DistrictEntity getDistrict() {
+		return district;
 	}
 
-	public void setDistrictId(Long districtId) {
-		this.districtId = districtId;
+	public void setDistrict(DistrictEntity district) {
+		this.district = district;
 	}
 
+	public Set<RentAreaEntity> getRentAreas() {
+		return rentAreas;
+	}
+
+	public void setRentAreas(Set<RentAreaEntity> rentAreas) {
+		this.rentAreas = rentAreas;
+	}
+
+	public Set<UserEntity> getAssignees() {
+		return assignees;
+	}
+
+	public void setAssignees(Set<UserEntity> assignees) {
+		this.assignees = assignees;
+	}
+
+	public Set<RentType> getRentTypes() {
+		return rentTypes;
+	}
+
+	public void setRentTypes(Set<RentType> rentTypes) {
+		this.rentTypes = rentTypes;
+	}
 }

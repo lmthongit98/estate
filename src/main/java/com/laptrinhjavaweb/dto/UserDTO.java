@@ -1,9 +1,8 @@
 package com.laptrinhjavaweb.dto;
 
 public class UserDTO {
-
 	private String username;
-	private String fullname;
+	private String fullName;
 
 	public String getUsername() {
 		return username;
@@ -13,12 +12,11 @@ public class UserDTO {
 		this.username = username;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-
 }

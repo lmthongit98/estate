@@ -7,9 +7,5 @@ import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 
 public interface BuildingRepository {
-	List<BuildingEntity> searchBuildings(Map<String, String> params, List<String> types);
-
-//	List<BuildingEntity> findAll(Map<String, String> params, List<String> types);
-
-	List<BuildingEntity> findAll(BuildingSearchBuilder builder);
+	List<BuildingEntity> findByConditions(BuildingSearchBuilder builder);
 }

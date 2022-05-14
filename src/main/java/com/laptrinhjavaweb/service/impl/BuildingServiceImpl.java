@@ -22,7 +22,7 @@ public class BuildingServiceImpl implements BuildingService {
 	private BuildingRepository buildingRepository;
 
 	@Autowired
-	private BuildingConverter buildingCoverter;
+	private BuildingConverter buildingConverter;
 	
 	
 	@Override
@@ -31,9 +31,9 @@ public class BuildingServiceImpl implements BuildingService {
 
 		BuildingSearchBuilder builder = convertParamsToBuilder(params, types);
 		
-		List<BuildingEntity> buildingEntitys = buildingRepository.findAll(builder);
-		for (BuildingEntity entity : buildingEntitys) {
-			BuildingSearchResponse response = buildingCoverter.covertToBuildingSearchResponseFromEnity(entity);
+		List<BuildingEntity> buildingEntities = buildingRepository.findByConditions(builder);
+		for (BuildingEntity entity : buildingEntities) {
+			BuildingSearchResponse response = buildingConverter.covertToBuildingSearchResponseFromEnity(entity);
 			responses.add(response);
 		}
 
@@ -66,27 +66,10 @@ public class BuildingServiceImpl implements BuildingService {
 										.setCostRentTo(rentPriceTo)
 										.setAreaRentFrom(areaFrom)
 										.setAreaRentTo(areaTo)
+										.setBuildingTypes(types)
 										.build();
 		
 		return builder;
-	}
-
-	@Override
-	public List<BuildingSearchResponse> searchBuildings(Map<String, String> params, List<String> types) {
-
-		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
-
-		if (params.isEmpty() && (types == null || types.isEmpty())) {
-			return responses;
-		}
-
-		List<BuildingEntity> buildingEntitys = buildingRepository.searchBuildings(params, types);
-		for (BuildingEntity entity : buildingEntitys) {
-			BuildingSearchResponse response = buildingCoverter.covertToBuildingSearchResponseFromEnity(entity);
-			responses.add(response);
-		}
-
-		return responses;
 	}
 
 }
