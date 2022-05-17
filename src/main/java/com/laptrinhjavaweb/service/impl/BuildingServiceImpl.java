@@ -14,6 +14,7 @@ import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.repository.BuildingRepository;
 import com.laptrinhjavaweb.service.BuildingService;
 import com.laptrinhjavaweb.util.MapUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -24,10 +25,11 @@ public class BuildingServiceImpl implements BuildingService {
 	@Autowired
 	private BuildingConverter buildingConverter;
 	
-	
+
+	@Transactional
 	@Override
 	public List<BuildingSearchResponse> findAll(Map<String, String> params, List<String> types) {
-		List<BuildingSearchResponse> responses = new ArrayList<BuildingSearchResponse>();
+		List<BuildingSearchResponse> responses = new ArrayList<>();
 
 		BuildingSearchBuilder builder = convertParamsToBuilder(params, types);
 		

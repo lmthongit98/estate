@@ -1,11 +1,11 @@
 package com.laptrinhjavaweb.repository;
 
-import java.util.List;
-import java.util.Map;
-
-import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.entity.BuildingEntity;
+import com.laptrinhjavaweb.repository.custom.BuildingRepositoryCustom;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface BuildingRepository {
-	List<BuildingEntity> findByConditions(BuildingSearchBuilder builder);
+@Repository
+public interface BuildingRepository extends BuildingRepositoryCustom, JpaRepository<BuildingEntity, Long> {
+
 }

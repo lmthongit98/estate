@@ -9,7 +9,7 @@ public class RentAreaEntity extends BaseEntity {
     @Column(name = "value")
     private String value;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
     @JoinColumn(name = "building_id")
     private BuildingEntity building;
 

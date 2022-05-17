@@ -1,23 +1,23 @@
-package com.laptrinhjavaweb.repository.impl;
+package com.laptrinhjavaweb.repository.custom.impl;
 
 import java.lang.reflect.Field;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.laptrinhjavaweb.repository.custom.BuildingRepositoryCustom;
 import org.springframework.stereotype.Repository;
 
 import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.constant.SystemContant;
 import com.laptrinhjavaweb.entity.BuildingEntity;
-import com.laptrinhjavaweb.repository.BuildingRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Repository
-public class BuildingRepositoryImpl implements BuildingRepository {
+public class BuildingRepositoryCustomImpl implements BuildingRepositoryCustom {
 
 	@PersistenceContext
 	private EntityManager entityManager;
