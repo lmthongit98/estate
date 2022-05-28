@@ -27,15 +27,15 @@ public class UserEntity extends BaseEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false))
-    private Set<RoleEntity> roles = new HashSet<RoleEntity>();
+            joinColumns = @JoinColumn(name = "userid", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "roleid", nullable = false))
+    private Set<RoleEntity> roles = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "assignment_building",
-            joinColumns = @JoinColumn(name = "staff_id", nullable = false),
-            inverseJoinColumns = @JoinColumn(name = "building_id", nullable = false))
-    private Set<BuildingEntity> assignedBuildings = new HashSet<BuildingEntity>();
+    @JoinTable(name = "assignmentbuilding",
+            joinColumns = @JoinColumn(name = "staffid", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "buildingid", nullable = false))
+    private Set<BuildingEntity> assignedBuildings = new HashSet<>();
 
     public String getUserName() {
         return userName;

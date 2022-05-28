@@ -15,6 +15,9 @@ public class BuildingEntity extends BaseEntity {
 	
 	@Column(name = "ward")
 	private String ward;
+
+	@Column(name = "district")
+	private String district;
 	
 	@Column(name = "structure")
 	private String stucture;
@@ -30,6 +33,9 @@ public class BuildingEntity extends BaseEntity {
 	
 	@Column(name = "managerphone")
 	private String managerPhone;
+
+	@Column(name = "type")
+	private String type;
 	
 	@Column(name = "direction")
 	private String direction;
@@ -85,18 +91,24 @@ public class BuildingEntity extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
 	private Set<RentAreaEntity> rentAreas = new HashSet<>();
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
-	@JoinColumn(name = "district_id")
-	private DistrictEntity district;
-
 	@ManyToMany(mappedBy = "assignedBuildings", fetch = FetchType.LAZY)
 	private Set<UserEntity> assignees = new HashSet<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "building_renttype",
-			joinColumns = @JoinColumn(name = "building_id", nullable = false),
-			inverseJoinColumns = @JoinColumn(name = "renttype_id", nullable = false))
-	private Set<RentType> rentTypes = new HashSet<>();
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getName() {
 		return name;
@@ -298,14 +310,6 @@ public class BuildingEntity extends BaseEntity {
 		this.managerPhone = managerPhone;
 	}
 
-	public DistrictEntity getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(DistrictEntity district) {
-		this.district = district;
-	}
-
 	public Set<RentAreaEntity> getRentAreas() {
 		return rentAreas;
 	}
@@ -320,13 +324,5 @@ public class BuildingEntity extends BaseEntity {
 
 	public void setAssignees(Set<UserEntity> assignees) {
 		this.assignees = assignees;
-	}
-
-	public Set<RentType> getRentTypes() {
-		return rentTypes;
-	}
-
-	public void setRentTypes(Set<RentType> rentTypes) {
-		this.rentTypes = rentTypes;
 	}
 }

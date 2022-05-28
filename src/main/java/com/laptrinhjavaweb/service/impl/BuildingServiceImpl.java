@@ -1,9 +1,11 @@
 package com.laptrinhjavaweb.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import com.laptrinhjavaweb.entity.RentAreaEntity;
+import com.laptrinhjavaweb.enums.BuildingTypesEnum;
+import com.laptrinhjavaweb.enums.DistrictsEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,25 @@ public class BuildingServiceImpl implements BuildingService {
 
 	@Autowired
 	private BuildingConverter buildingConverter;
-	
+
+
+	@Override
+	public Map<String, String> getDistricts() {
+		Map<String, String> districts = new HashMap<>();
+		for (DistrictsEnum item: DistrictsEnum.values()) {
+			districts.put(item.toString(), item.getDistrictValue());
+		}
+		return districts;
+	}
+
+	@Override
+	public Map<String, String> getBuildingTypes() {
+		Map<String, String> buildingTypes = new HashMap<>();
+		for (BuildingTypesEnum item: BuildingTypesEnum.values()) {
+			buildingTypes.put(item.toString(), item.getBuildingTypeValue());
+		}
+		return buildingTypes;
+	}
 
 	@Transactional
 	@Override
@@ -36,6 +56,16 @@ public class BuildingServiceImpl implements BuildingService {
 		List<BuildingEntity> buildingEntities = buildingRepository.findByConditions(builder);
 		for (BuildingEntity entity : buildingEntities) {
 			BuildingSearchResponse response = buildingConverter.covertToBuildingSearchResponseFromEnity(entity);
+
+			response.setAddress(response.getAddress() + ", " + getDistricts().getOrDefault(entity.getDistrict(), null));
+
+			Set<RentAreaEntity> rentAreas = entity.getRentAreas();
+			if(rentAreas != null && !rentAreas.isEmpty()) {
+				String rentAreaStr = rentAreas.stream()
+						.map(RentAreaEntity::getValue)
+						.collect(Collectors.joining(", "));
+				response.setRentArea(rentAreaStr);
+			}
 			responses.add(response);
 		}
 
@@ -54,9 +84,9 @@ public class BuildingServiceImpl implements BuildingService {
 		Integer rentPriceTo = MapUtil.getValue(params, "rentPriceTo", Integer.class);
 		Integer areaFrom = MapUtil.getValue(params, "areaFrom", Integer.class);
 		Integer areaTo = MapUtil.getValue(params, "areaTo", Integer.class);
-		
-		
-		BuildingSearchBuilder builder = new BuildingSearchBuilder.Builder()
+
+
+		return new BuildingSearchBuilder.Builder()
 										.setName(name)
 										.setStreet(street)
 										.setNumberOfBasement(numberOfBasement)
@@ -70,8 +100,6 @@ public class BuildingServiceImpl implements BuildingService {
 										.setAreaRentTo(areaTo)
 										.setBuildingTypes(types)
 										.build();
-		
-		return builder;
 	}
 
 }

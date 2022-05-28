@@ -9,6 +9,7 @@ public class BuildingSearchResponse {
 	private Integer numberOfBasement;
 	private Integer floorArea;
 	private Integer rentPrice;
+	private String rentArea; // e.g: "100, 200, 300"
 	private String managerName;
 	private String managerPhone;
 
@@ -92,4 +93,11 @@ public class BuildingSearchResponse {
 		this.managerPhone = managerPhone;
 	}
 
+	public String getRentArea() {
+		return rentArea;
+	}
+
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
+	}
 }
