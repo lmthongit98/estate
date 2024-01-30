@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 import com.laptrinhjavaweb.enums.SpecialSearchParams;
 import com.laptrinhjavaweb.repository.custom.BuildingRepositoryCustom;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.constant.SystemConstant;
 import com.laptrinhjavaweb.entity.BuildingEntity;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 @Repository
 public class BuildingRepositoryCustomImpl implements BuildingRepositoryCustom {

@@ -2,13 +2,10 @@ package com.laptrinhjavaweb.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -17,6 +14,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
+@Getter
+@Setter
 public class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,24 +36,4 @@ public class BaseEntity {
 	@Column(name = "modifiedby")
 	@LastModifiedBy
 	private String modifiedBy;
-
-	public Long getId() {
-		return id;
-	}
-
-	public Date getCreatedDate() {
-		return createdDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public String getModifiedBy() {
-		return modifiedBy;
-	}
 }

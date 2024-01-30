@@ -1,31 +1,20 @@
 package com.laptrinhjavaweb.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "rentarea")
+@Getter
+@Setter
 public class RentAreaEntity extends BaseEntity {
 
     @Column(name = "value")
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "buildingid")
     private BuildingEntity building;
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public BuildingEntity getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(BuildingEntity building) {
-        this.building = building;
-    }
 }

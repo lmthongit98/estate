@@ -1,328 +1,103 @@
 package com.laptrinhjavaweb.entity;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "building")
+@Getter
+@Setter
 public class BuildingEntity extends BaseEntity {
-	@Column(name = "name")
-	private String name;
-	
-	@Column(name = "street")
-	private String street;
-	
-	@Column(name = "ward")
-	private String ward;
+    @Column(name = "name")
+    private String name;
 
-	@Column(name = "district")
-	private String district;
-	
-	@Column(name = "structure")
-	private String stucture;
-	
-	@Column(name = "numberofbasement")
-	private Integer numberOfBasement;
-	
-	@Column(name = "floorarea")
-	private Integer floorArea;
-	
-	@Column(name = "managername")
-	private String managerName;
-	
-	@Column(name = "managerphone")
-	private String managerPhone;
+    @Column(name = "street")
+    private String street;
 
-	@Column(name = "type")
-	private String type;
-	
-	@Column(name = "direction")
-	private String direction;
-	
-	@Column(name = "level")
-	private String level;
-	
-	@Column(name = "rentprice")
-	private Integer rentPrice;
-	
-	@Column(name = "rentpricedescription")
-	private String rentPriceDescription;
-	
-	@Column(name = "servicefee")
-	private String serviceFee;
-	
-	@Column(name = "carfee")
-	private String carFee;
-	
-	@Column(name = "motorbikefee")
-	private String motorbikeFee;
-	
-	@Column(name = "overtimefee")
-	private String overtimeFee;
-	
-	@Column(name = "waterfee")
-	private String waterFee;
-	
-	@Column(name = "electricityfee")
-	private String electricityFee;
-	
-	@Column(name = "deposit")
-	private String deposit;
-	
-	@Column(name = "payment")
-	private String payment;
-	
-	@Column(name = "renttime")
-	private String rentTime;
-	
-	@Column(name = "decorationtime")
-	private String decorationTime;
-	
-	@Column(name = "brokeragefee")
-	private Integer brokerAgeFee;
-	
-	@Column(name = "note")
-	private String note;
-	
-	@Column(name = "linkofbuilding")
-	private String linkOfBuilding;
+    @Column(name = "ward")
+    private String ward;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
-	private Set<RentAreaEntity> rentAreas = new HashSet<>();
+    @Column(name = "district")
+    private String district;
 
-	@ManyToMany(mappedBy = "assignedBuildings", fetch = FetchType.LAZY)
-	private Set<UserEntity> assignees = new HashSet<>();
+    @Column(name = "structure")
+    private String stucture;
 
-	public String getDistrict() {
-		return district;
-	}
+    @Column(name = "numberofbasement")
+    private Integer numberOfBasement;
 
-	public void setDistrict(String district) {
-		this.district = district;
-	}
+    @Column(name = "floorarea")
+    private Integer floorArea;
 
-	public String getType() {
-		return type;
-	}
+    @Column(name = "managername")
+    private String managerName;
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    @Column(name = "managerphone")
+    private String managerPhone;
 
-	public String getName() {
-		return name;
-	}
+    @Column(name = "type")
+    private String type;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "direction")
+    private String direction;
 
-	public Integer getNumberOfBasement() {
-		return numberOfBasement;
-	}
+    @Column(name = "level")
+    private String level;
 
-	public void setNumberOfBasement(Integer numberOfBasement) {
-		this.numberOfBasement = numberOfBasement;
-	}
+    @Column(name = "rentprice")
+    private Integer rentPrice;
 
-	public String getStreet() {
-		return street;
-	}
+    @Column(name = "rentpricedescription")
+    private String rentPriceDescription;
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    @Column(name = "servicefee")
+    private String serviceFee;
 
-	public String getWard() {
-		return ward;
-	}
+    @Column(name = "carfee")
+    private String carFee;
 
-	public void setWard(String ward) {
-		this.ward = ward;
-	}
+    @Column(name = "motorbikefee")
+    private String motorbikeFee;
 
-	public String getStucture() {
-		return stucture;
-	}
+    @Column(name = "overtimefee")
+    private String overtimeFee;
 
-	public void setStucture(String stucture) {
-		this.stucture = stucture;
-	}
+    @Column(name = "waterfee")
+    private String waterFee;
 
-	public Integer getFloorArea() {
-		return floorArea;
-	}
+    @Column(name = "electricityfee")
+    private String electricityFee;
 
-	public void setFloorArea(Integer floorArea) {
-		this.floorArea = floorArea;
-	}
+    @Column(name = "deposit")
+    private String deposit;
 
-	public String getDirection() {
-		return direction;
-	}
+    @Column(name = "payment")
+    private String payment;
 
-	public void setDirection(String direction) {
-		this.direction = direction;
-	}
+    @Column(name = "renttime")
+    private String rentTime;
 
-	public String getLevel() {
-		return level;
-	}
+    @Column(name = "decorationtime")
+    private String decorationTime;
 
-	public void setLevel(String level) {
-		this.level = level;
-	}
+    @Column(name = "brokeragefee")
+    private Integer brokerAgeFee;
 
-	public Integer getRentPrice() {
-		return rentPrice;
-	}
+    @Column(name = "note")
+    private String note;
 
-	public void setRentPrice(Integer rentPrice) {
-		this.rentPrice = rentPrice;
-	}
+    @Column(name = "linkofbuilding")
+    private String linkOfBuilding;
 
-	public String getRentPriceDescription() {
-		return rentPriceDescription;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
+    private Set<RentAreaEntity> rentAreas = new HashSet<>();
 
-	public void setRentPriceDescription(String rentPriceDescription) {
-		this.rentPriceDescription = rentPriceDescription;
-	}
+    @ManyToMany(mappedBy = "assignedBuildings", fetch = FetchType.LAZY)
+    private Set<UserEntity> assignees = new HashSet<>();
 
-	public String getServiceFee() {
-		return serviceFee;
-	}
-
-	public void setServiceFee(String serviceFee) {
-		this.serviceFee = serviceFee;
-	}
-
-	public String getCarFee() {
-		return carFee;
-	}
-
-	public void setCarFee(String carFee) {
-		this.carFee = carFee;
-	}
-
-	public String getElectricityFee() {
-		return electricityFee;
-	}
-
-	public void setElectricityFee(String electricityFee) {
-		this.electricityFee = electricityFee;
-	}
-
-	public String getDeposit() {
-		return deposit;
-	}
-
-	public void setDeposit(String deposit) {
-		this.deposit = deposit;
-	}
-
-	public String getPayment() {
-		return payment;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
-	public String getRentTime() {
-		return rentTime;
-	}
-
-	public void setRentTime(String rentTime) {
-		this.rentTime = rentTime;
-	}
-
-	public String getDecorationTime() {
-		return decorationTime;
-	}
-
-	public void setDecorationTime(String decorationTime) {
-		this.decorationTime = decorationTime;
-	}
-
-	public Integer getBrokerAgeFee() {
-		return brokerAgeFee;
-	}
-
-	public void setBrokerAgeFee(Integer brokerAgeFee) {
-		this.brokerAgeFee = brokerAgeFee;
-	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public String getLinkOfBuilding() {
-		return linkOfBuilding;
-	}
-
-	public void setLinkOfBuilding(String linkOfBuilding) {
-		this.linkOfBuilding = linkOfBuilding;
-	}
-
-	public String getMotorbikeFee() {
-		return motorbikeFee;
-	}
-
-	public void setMotorbikeFee(String motorbikeFee) {
-		this.motorbikeFee = motorbikeFee;
-	}
-
-	public String getOvertimeFee() {
-		return overtimeFee;
-	}
-
-	public void setOvertimeFee(String overtimeFee) {
-		this.overtimeFee = overtimeFee;
-	}
-
-	public String getWaterFee() {
-		return waterFee;
-	}
-
-	public void setWaterFee(String waterFee) {
-		this.waterFee = waterFee;
-	}
-
-	public String getManagerName() {
-		return managerName;
-	}
-
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
-	}
-
-	public String getManagerPhone() {
-		return managerPhone;
-	}
-
-	public void setManagerPhone(String managerPhone) {
-		this.managerPhone = managerPhone;
-	}
-
-	public Set<RentAreaEntity> getRentAreas() {
-		return rentAreas;
-	}
-
-	public void setRentAreas(Set<RentAreaEntity> rentAreas) {
-		this.rentAreas = rentAreas;
-	}
-
-	public Set<UserEntity> getAssignees() {
-		return assignees;
-	}
-
-	public void setAssignees(Set<UserEntity> assignees) {
-		this.assignees = assignees;
-	}
 }
